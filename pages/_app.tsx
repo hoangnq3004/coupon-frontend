@@ -21,7 +21,7 @@ export default function MyApp(props: AppProps): JSX.Element {
   return (
     <>
       <Head>
-        <title>HoangNQ&apos;s Blog</title>
+        <title>Mã giảm giá, khuyến mãi tốt nhất 2020</title>
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
