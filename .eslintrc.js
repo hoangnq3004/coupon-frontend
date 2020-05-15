@@ -1,14 +1,19 @@
 module.exports = {
-  root: true,
-  env: {
-    browser: true,
-    commonjs: true,
-    es6: true,
-    node: true,
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 2018,
+    project: 'tsconfig.json',
+    sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true,
+    },
   },
+  plugins: ['react', '@typescript-eslint'],
   extends: [
+    'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-    'eslint:recommended',
+    'prettier',
+    'prettier/@typescript-eslint',
     'plugin:react/recommended',
     'plugin:import/errors',
     'plugin:import/warnings',
@@ -21,16 +26,17 @@ module.exports = {
     process: true,
     React: 'writable',
   },
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaVersion: 2018,
-    sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true,
-    },
+  root: true,
+  env: {
+    browser: true,
+    commonjs: true,
+    es6: true,
+    node: true,
   },
-  plugins: ['react', '@typescript-eslint'],
   rules: {
+    '@typescript-eslint/interface-name-prefix': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
     'react/react-in-jsx-scope': 'error',
     'react/prop-types': 0,
     'react/jsx-uses-vars': [2],
