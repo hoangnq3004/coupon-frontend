@@ -1,29 +1,35 @@
-import {ServerStyleSheets} from '@material-ui/core/styles';
-import Document, {Head, Html, Main, NextScript} from 'next/document';
+import { ServerStyleSheets } from '@material-ui/core/styles';
+import Document, { Head, Html, Main, NextScript } from 'next/document';
 import React from 'react';
-import {HomeTheme} from 'components/_theme';
+import { HomeTheme } from 'components/_theme';
+import {
+  RenderPageResult,
+  DocumentInitialProps,
+} from 'next/dist/next-server/lib/utils';
 
 export default class MyDocument extends Document {
-  render() {
+  render(): JSX.Element {
     return (
       <Html lang="en">
         <Head>
           {/* PWA primary color */}
-          <title>HoangNQ's Blog</title>
-          <meta name="theme-color" content={HomeTheme.palette.primary.main}/>
-          <meta charSet="utf-8"/>
-          <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+          <meta name="theme-color" content={HomeTheme.palette.primary.main} />
+          <meta charSet="utf-8" />
+          <meta
+            name="viewport"
+            content="initial-scale=1.0, width=device-width"
+          />
         </Head>
         <body>
-        <Main/>
-        <NextScript/>
+          <Main />
+          <NextScript />
         </body>
       </Html>
     );
   }
 }
 
-MyDocument.getInitialProps = async ctx => {
+MyDocument.getInitialProps = async (ctx): Promise<DocumentInitialProps> => {
   // Resolution order
   //
   // On the server:
@@ -50,9 +56,10 @@ MyDocument.getInitialProps = async ctx => {
   const sheets = new ServerStyleSheets();
   const originalRenderPage = ctx.renderPage;
 
-  ctx.renderPage = () =>
+  ctx.renderPage = (): RenderPageResult | Promise<RenderPageResult> =>
     originalRenderPage({
-      enhanceApp: App => props => sheets.collect(<App {...props} />),
+      enhanceApp: (App) => (props): JSX.Element =>
+        sheets.collect(<App {...props} />),
     });
 
   const initialProps = await Document.getInitialProps(ctx);
